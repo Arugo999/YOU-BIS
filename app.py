@@ -74,6 +74,38 @@ def set_bg_local(image_file):
 set_bg_local('background.png')
 
 # ==========================================
+# 2.1 ตกแต่งปุ่มถ่ายรูปของกล้องให้เห็นชัด (ทำงานเสมอ แม้ไม่มี background.png)
+# ==========================================
+st.markdown("""
+<style>
+/* ปุ่มถ่ายรูป / ถ่ายใหม่ ของกล้อง */
+[data-testid="stCameraInputButton"] {
+    background-color: #ff6b81 !important;
+    border: none !important;
+    border-radius: 30px !important;
+    padding: 0.8rem 2.2rem !important;
+    min-height: 3.2rem !important;
+    font-size: 1.15rem !important;
+    font-weight: bold !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25) !important;
+    cursor: pointer;
+}
+[data-testid="stCameraInputButton"],
+[data-testid="stCameraInputButton"] * {
+    color: #FFFFFF !important;
+}
+[data-testid="stCameraInputButton"]:hover {
+    background-color: #ff4d67 !important;
+    transform: translateY(-2px);
+}
+/* ปุ่มสลับกล้อง (ถ้ามีหลายกล้อง) */
+[data-testid="stCameraInputSwitchButton"] {
+    border-radius: 20px !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# ==========================================
 # 3. โหลดฐานข้อมูล
 # ==========================================
 @st.cache_data
@@ -209,7 +241,7 @@ img_file = None
 if source.startswith("📸"):
     st.info(
         "💡 **วิธีใช้งาน:** กด 'Allow' เมื่อเบราว์เซอร์ขอใช้กล้อง "
-        "วางสลากให้อยู่กลางภาพ แสงสว่างพอ ไม่สะท้อนแสง แล้วกดถ่ายภาพ"
+        "วางสลากให้อยู่กลางภาพ แสงสว่างพอ ไม่สะท้อนแสง แล้วกดปุ่มสีชมพู **Take Photo** ใต้ภาพจากกล้อง"
     )
     img_file = st.camera_input(
         "ถ่ายรูปสลากผลิตภัณฑ์",
